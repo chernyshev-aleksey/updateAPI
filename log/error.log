@@ -1,0 +1,249 @@
+2022-10-16 13:46:43 | ERROR    | An error has been caught in function '<module>', process 'MainProcess' (34544), thread 'MainThread' (4300916096):
+Traceback (most recent call last):
+
+> File "/Users/alex/PycharmProjects/UpdateAPI/update.py", line 277, in <module>
+    main()
+    └ <function main at 0x1173f3c70>
+
+  File "/Users/alex/PycharmProjects/UpdateAPI/update.py", line 257, in main
+    download({
+    └ <function download at 0x1173f3760>
+
+  File "/Users/alex/PycharmProjects/UpdateAPI/src/download.py", line 160, in download
+    link = get_link()
+           └ <function download.<locals>.get_link at 0x115d4e950>
+
+  File "/Users/alex/PycharmProjects/UpdateAPI/src/download.py", line 155, in get_link
+    if link is None:
+
+NameError: free variable 'link' referenced before assignment in enclosing scope
+2022-10-16 16:06:18 | ERROR    | An error has been caught in function '<module>', process 'MainProcess' (20128), thread 'MainThread' (4342367616):
+Traceback (most recent call last):
+
+  File "/Users/alex/PycharmProjects/UpdateAPI/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1204, in _execute_context
+    context = constructor(dialect, self, conn, *args)
+              │           │        │     │      └ (<gino.dialects.asyncpg.AsyncpgCompiler object at 0x11a747bb0>, [])
+              │           │        │     └ <gino.engine._DBAPIConnection object at 0x11a746290>
+              │           │        └ <gino.engine._SAConnection object at 0x11a747070>
+              │           └ <gino.dialects.asyncpg.AsyncpgDialect object at 0x11a746ce0>
+              └ <bound method DefaultExecutionContext._init_compiled of <class 'gino.dialects.asyncpg.AsyncpgExecutionContext'>>
+  File "/Users/alex/PycharmProjects/UpdateAPI/venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 854, in _init_compiled
+    param.append(processors[key](compiled_params[key]))
+    │     │      │          │    │               └ 'valid'
+    │     │      │          │    └ {'site_id': 451041, 'paid_cost': 249, 'product': 'Сочиняй — сдавай!', 'subject': 'Русский язык', '_class': '9 класс', 'data_c...
+    │     │      │          └ 'valid'
+    │     │      └ {'valid': <function Boolean.bind_processor.<locals>.process at 0x11a72bb50>}
+    │     └ <method 'append' of 'list' objects>
+    └ [451041, 249, 'Сочиняй — сдавай!', 'Русский язык', '9 класс', '16.10.2022 15:53', '16.10.2022 15:54']
+  File "/Users/alex/PycharmProjects/UpdateAPI/venv/lib/python3.10/site-packages/sqlalchemy/sql/sqltypes.py", line 1841, in process
+    value = _strict_as_bool(value)
+            │               └ 'Да'
+            └ <bound method Boolean._strict_as_bool of Boolean()>
+  File "/Users/alex/PycharmProjects/UpdateAPI/venv/lib/python3.10/site-packages/sqlalchemy/sql/sqltypes.py", line 1816, in _strict_as_bool
+    raise TypeError("Not a boolean value: %r" % value)
+                                                └ 'Да'
+
+TypeError: Not a boolean value: 'Да'
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+> File "/Users/alex/PycharmProjects/UpdateAPI/update.py", line 310, in <module>
+    main()
+    └ <function main at 0x1196dfd00>
+
+  File "/Users/alex/PycharmProjects/UpdateAPI/update.py", line 304, in main
+    asyncio.run(update_course(file_name))
+    │       │   │             └ '16.10.2022 15:00-16.10.2022 16:00.csv'
+    │       │   └ <function update_course at 0x102b33eb0>
+    │       └ <function run at 0x1034ff010>
+    └ <module 'asyncio' from '/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/__init__.py'>
+
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+           │    │                  └ <coroutine object update_course at 0x11a71ae30>
+           │    └ <function BaseEventLoop.run_until_complete at 0x1034fd360>
+           └ <_UnixSelectorEventLoop running=False closed=True debug=False>
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/base_events.py", line 646, in run_until_complete
+    return future.result()
+           │      └ <method 'result' of '_asyncio.Task' objects>
+           └ <Task finished name='Task-100' coro=<update_course() done, defined at /Users/alex/PycharmProjects/UpdateAPI/update.py:15> exc...
+
+  File "/Users/alex/PycharmProjects/UpdateAPI/update.py", line 28, in update_course
+    await Course.create(
+          │      └ <gino.crud._Create object at 0x11947baf0>
+          └ <class 'src.database.Course'>
+
+  File "/Users/alex/PycharmProjects/UpdateAPI/venv/lib/python3.10/site-packages/gino/crud.py", line 444, in _create_without_instance
+    return await cls(**values)._create(bind=bind, timeout=timeout)
+                 │     │                    │             └ <object object at 0x11711f440>
+                 │     │                    └ None
+                 │     └ {'site_id': 451041, 'paid_cost': 249, 'product': 'Сочиняй — сдавай!', 'subject': 'Русский язык', '_class': '9 класс', 'data_c...
+                 └ <class 'src.database.Course'>
+  File "/Users/alex/PycharmProjects/UpdateAPI/venv/lib/python3.10/site-packages/gino/crud.py", line 477, in _create
+    row = await bind.first(q)
+                │    │     └ <sqlalchemy.sql.dml.Insert object at 0x11a747e80>
+                │    └ <function GinoEngine.first at 0x1194cbeb0>
+                └ <asyncpg.pool.Pool max=10 min=10 cur=10 use=0>
+  File "/Users/alex/PycharmProjects/UpdateAPI/venv/lib/python3.10/site-packages/gino/engine.py", line 748, in first
+    return await conn.first(clause, *multiparams, **params)
+                 │    │     │        │              └ {}
+                 │    │     │        └ ()
+                 │    │     └ <sqlalchemy.sql.dml.Insert object at 0x11a747e80>
+                 │    └ <function GinoConnection.first at 0x1194cb1c0>
+                 └ <gino.engine.GinoConnection object at 0x11a7478b0>
+  File "/Users/alex/PycharmProjects/UpdateAPI/venv/lib/python3.10/site-packages/gino/engine.py", line 327, in first
+    result = self._execute(clause, multiparams, params)
+             │    │        │       │            └ {}
+             │    │        │       └ ()
+             │    │        └ <sqlalchemy.sql.dml.Insert object at 0x11a747e80>
+             │    └ <function GinoConnection._execute at 0x1194cb0a0>
+             └ <gino.engine.GinoConnection object at 0x11a7478b0>
+  File "/Users/alex/PycharmProjects/UpdateAPI/venv/lib/python3.10/site-packages/gino/engine.py", line 295, in _execute
+    return self._sa_conn.execute(clause, *multiparams, **params)
+           │    │        │       │        │              └ {}
+           │    │        │       │        └ ()
+           │    │        │       └ <sqlalchemy.sql.dml.Insert object at 0x11a747e80>
+           │    │        └ <function Connection.execute at 0x11942c550>
+           │    └ <gino.engine._SAConnection object at 0x11a747070>
+           └ <gino.engine.GinoConnection object at 0x11a7478b0>
+  File "/Users/alex/PycharmProjects/UpdateAPI/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1011, in execute
+    return meth(self, multiparams, params)
+           │    │     │            └ {}
+           │    │     └ ()
+           │    └ <gino.engine._SAConnection object at 0x11a747070>
+           └ <bound method ClauseElement._execute_on_connection of <sqlalchemy.sql.dml.Insert object at 0x11a747e80>>
+  File "/Users/alex/PycharmProjects/UpdateAPI/venv/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 298, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+           │          │                      │     │            └ {}
+           │          │                      │     └ ()
+           │          │                      └ <sqlalchemy.sql.dml.Insert object at 0x11a747e80>
+           │          └ <function Connection._execute_clauseelement at 0x11942c790>
+           └ <gino.engine._SAConnection object at 0x11a747070>
+  File "/Users/alex/PycharmProjects/UpdateAPI/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1124, in _execute_clauseelement
+    ret = self._execute_context(
+          │    └ <function _SAConnection._execute_context at 0x1194ca830>
+          └ <gino.engine._SAConnection object at 0x11a747070>
+  File "/Users/alex/PycharmProjects/UpdateAPI/venv/lib/python3.10/site-packages/gino/engine.py", line 121, in _execute_context
+    return super()._execute_context(
+  File "/Users/alex/PycharmProjects/UpdateAPI/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1206, in _execute_context
+    self._handle_dbapi_exception(
+    │    └ <function Connection._handle_dbapi_exception at 0x11942caf0>
+    └ <gino.engine._SAConnection object at 0x11a747070>
+  File "/Users/alex/PycharmProjects/UpdateAPI/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1510, in _handle_dbapi_exception
+    util.raise_(
+    │    └ <function raise_ at 0x11915a950>
+    └ <module 'sqlalchemy.util' from '/Users/alex/PycharmProjects/UpdateAPI/venv/lib/python3.10/site-packages/sqlalchemy/util/__ini...
+  File "/Users/alex/PycharmProjects/UpdateAPI/venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
+    raise exception
+  File "/Users/alex/PycharmProjects/UpdateAPI/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1204, in _execute_context
+    context = constructor(dialect, self, conn, *args)
+              │           │        │     │      └ (<gino.dialects.asyncpg.AsyncpgCompiler object at 0x11a747bb0>, [])
+              │           │        │     └ <gino.engine._DBAPIConnection object at 0x11a746290>
+              │           │        └ <gino.engine._SAConnection object at 0x11a747070>
+              │           └ <gino.dialects.asyncpg.AsyncpgDialect object at 0x11a746ce0>
+              └ <bound method DefaultExecutionContext._init_compiled of <class 'gino.dialects.asyncpg.AsyncpgExecutionContext'>>
+  File "/Users/alex/PycharmProjects/UpdateAPI/venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 854, in _init_compiled
+    param.append(processors[key](compiled_params[key]))
+    │     │      │          │    │               └ 'valid'
+    │     │      │          │    └ {'site_id': 451041, 'paid_cost': 249, 'product': 'Сочиняй — сдавай!', 'subject': 'Русский язык', '_class': '9 класс', 'data_c...
+    │     │      │          └ 'valid'
+    │     │      └ {'valid': <function Boolean.bind_processor.<locals>.process at 0x11a72bb50>}
+    │     └ <method 'append' of 'list' objects>
+    └ [451041, 249, 'Сочиняй — сдавай!', 'Русский язык', '9 класс', '16.10.2022 15:53', '16.10.2022 15:54']
+  File "/Users/alex/PycharmProjects/UpdateAPI/venv/lib/python3.10/site-packages/sqlalchemy/sql/sqltypes.py", line 1841, in process
+    value = _strict_as_bool(value)
+            │               └ 'Да'
+            └ <bound method Boolean._strict_as_bool of Boolean()>
+  File "/Users/alex/PycharmProjects/UpdateAPI/venv/lib/python3.10/site-packages/sqlalchemy/sql/sqltypes.py", line 1816, in _strict_as_bool
+    raise TypeError("Not a boolean value: %r" % value)
+                                                └ 'Да'
+
+sqlalchemy.exc.StatementError: (builtins.TypeError) Not a boolean value: 'Да'
+[SQL: INSERT INTO "CoursePaid" (site_id, paid_cost, product, subject, _class, data_created, data_paid, valid, unique_code, type_pay) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "CoursePaid".site_id, "CoursePaid".paid_cost, "CoursePaid".product, "CoursePaid".subject, "CoursePaid"._class, "CoursePaid".data_created, "CoursePaid".data_paid, "CoursePaid".valid, "CoursePaid".unique_code, "CoursePaid".type_pay]
+2022-11-01 20:31:57 | ERROR    | An error has been caught in function '<module>', process 'MainProcess' (90817), thread 'MainThread' (4301522304):
+Traceback (most recent call last):
+
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/selector_events.py", line 853, in _read_ready__data_received
+    data = self._sock.recv(self.max_size)
+           │    │          │    └ 262144
+           │    │          └ <_SelectorSocketTransport closed fd=12>
+           │    └ None
+           └ <_SelectorSocketTransport closed fd=12>
+
+ConnectionResetError: [Errno 54] Connection reset by peer
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+> File "/Users/alex/PycharmProjects/UpdateAPI/update.py", line 311, in <module>
+    main()
+    └ <function main at 0x1175fbc70>
+
+  File "/Users/alex/PycharmProjects/UpdateAPI/update.py", line 297, in main
+    asyncio.run(update_mastergroup(file_name))
+    │       │   │                  └ 'purchases_01_11_2022_04_39.csv'
+    │       │   └ <function update_mastergroup at 0x115db0160>
+    │       └ <function run at 0x101466f80>
+    └ <module 'asyncio' from '/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/__init__.py'>
+
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+           │    │                  └ <coroutine object update_mastergroup at 0x1174284a0>
+           │    └ <function BaseEventLoop.run_until_complete at 0x1014652d0>
+           └ <_UnixSelectorEventLoop running=False closed=True debug=False>
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/base_events.py", line 646, in run_until_complete
+    return future.result()
+           │      └ <method 'result' of '_asyncio.Task' objects>
+           └ <Task finished name='Task-1' coro=<update_mastergroup() done, defined at /Users/alex/PycharmProjects/UpdateAPI/update.py:108>...
+
+  File "/Users/alex/PycharmProjects/UpdateAPI/update.py", line 195, in update_mastergroup
+    await MasterGroup.create(
+          │           └ <gino.crud._Create object at 0x11739efe0>
+          └ <class 'src.database.MasterGroup'>
+
+  File "/Users/alex/PycharmProjects/UpdateAPI/venv/lib/python3.10/site-packages/gino/crud.py", line 444, in _create_without_instance
+    return await cls(**values)._create(bind=bind, timeout=timeout)
+                 │     │                    │             └ <object object at 0x114db3430>
+                 │     │                    └ None
+                 │     └ {'site_id': 897713, 'paid_cost': 2523, 'product': 'Базовая математика (Стандарт) — Ноябрь 2022', 'subject': 'Базовая математи...
+                 └ <class 'src.database.MasterGroup'>
+  File "/Users/alex/PycharmProjects/UpdateAPI/venv/lib/python3.10/site-packages/gino/crud.py", line 477, in _create
+    row = await bind.first(q)
+                │    │     └ <sqlalchemy.sql.dml.Insert object at 0x16d04d630>
+                │    └ <function GinoEngine.first at 0x1173e3e20>
+                └ <asyncpg.pool.Pool max=10 min=10 cur=0 use=0>
+  File "/Users/alex/PycharmProjects/UpdateAPI/venv/lib/python3.10/site-packages/gino/engine.py", line 747, in first
+    async with self.acquire(reuse=True) as conn:
+               │    │                      └ <gino.engine.GinoConnection object at 0x16d04e350>
+               │    └ <function GinoEngine.acquire at 0x1173e3b50>
+               └ <asyncpg.pool.Pool max=10 min=10 cur=0 use=0>
+  File "/Users/alex/PycharmProjects/UpdateAPI/venv/lib/python3.10/site-packages/asyncpg/pool.py", line 224, in release
+    raise ex
+  File "/Users/alex/PycharmProjects/UpdateAPI/venv/lib/python3.10/site-packages/asyncpg/pool.py", line 214, in release
+    await self._con.reset(timeout=budget)
+          │    │                  └ None
+          │    └ <member '_con' of 'PoolConnectionHolder' objects>
+          └ <asyncpg.pool.PoolConnectionHolder object at 0x1179a29c0>
+  File "/Users/alex/PycharmProjects/UpdateAPI/venv/lib/python3.10/site-packages/asyncpg/connection.py", line 1367, in reset
+    await self.execute(reset_query, timeout=timeout)
+          │    │       │                    └ None
+          │    │       └ 'SELECT pg_advisory_unlock_all();\nCLOSE ALL;\nUNLISTEN *;\nRESET ALL;'
+          │    └ <function Connection.execute at 0x1162768c0>
+          └ <asyncpg.connection.Connection object at 0x1179f2f80>
+  File "/Users/alex/PycharmProjects/UpdateAPI/venv/lib/python3.10/site-packages/asyncpg/connection.py", line 318, in execute
+    return await self._protocol.query(query, timeout)
+                 │    │               │      └ None
+                 │    │               └ 'SELECT pg_advisory_unlock_all();\nCLOSE ALL;\nUNLISTEN *;\nRESET ALL;'
+                 │    └ <member '_protocol' of 'Connection' objects>
+                 └ <asyncpg.connection.Connection object at 0x1179f2f80>
+  File "asyncpg/protocol/protocol.pyx", line 338, in query
+    return await waiter
+
+asyncpg.exceptions.ConnectionDoesNotExistError: connection was closed in the middle of operation
